@@ -25,6 +25,14 @@ SOFTWARE.
     %display-block-when-ssm{
         display: block;
     }
+    %display-flex-when-ssm{
+        display:-webkit-flex;
+        display:flex;
+    }
+    %display-inline-flex-when-ssm{
+        display:-webkit-inline-flex;
+        display:inline-flex;
+    }
     %display-inline-block-when-ssm{
         display: inline-block;
     }
@@ -35,6 +43,14 @@ SOFTWARE.
 @media (min-width: 576px) and (max-width: 767px){
     %display-block-when-sm{
         display: block;
+    }
+    %display-flex-when-sm{
+        display:-webkit-flex;
+        display:flex;
+    }
+    %display-inline-flex-when-sm{
+        display:-webkit-inline-flex;
+        display:inline-flex;
     }
     %display-inline-block-when-sm{
         display: inline-block;
@@ -47,6 +63,14 @@ SOFTWARE.
     %display-block-when-md{
         display: block;
     }
+    %display-flex-when-md{
+        display:-webkit-flex;
+        display:flex;
+    }
+    %display-inline-flex-when-md{
+        display:-webkit-inline-flex;
+        display:inline-flex;
+    }
     %display-inline-block-when-md{
         display: inline-block;
     }
@@ -57,6 +81,14 @@ SOFTWARE.
 @media (min-width: 992px) and (max-width: 1139px){
     %display-block-when-lg{
         display: block;
+    }
+    %display-flex-when-lg{
+        display:-webkit-flex;
+        display:flex;
+    }
+    %display-inline-flex-when-lg{
+        display:-webkit-inline-flex;
+        display:inline-flex;
     }
     %display-inline-block-when-lg{
         display: inline-block;
@@ -69,6 +101,14 @@ SOFTWARE.
     %display-block-when-xl{
         display: block;
     }
+    %display-flex-when-xl{
+        display:-webkit-flex;
+        display:flex;
+    }
+    %display-inline-flex-when-xl{
+        display:-webkit-inline-flex;
+        display:inline-flex;
+    }
     %display-inline-block-when-xl{
         display: inline-block;
     }
@@ -80,6 +120,14 @@ SOFTWARE.
 %display-block-at-most-sm{
     @extend %display-block-when-ssm;
     @extend %display-block-when-sm;
+}
+%display-flex-at-most-sm{
+    @extend %display-flex-when-ssm;
+    @extend %display-flex-when-sm;
+}
+%display-inline-flex-at-most-sm{
+    @extend %display-inline-flex-when-ssm;
+    @extend %display-inline-flex-when-sm;
 }
 %display-inline-block-at-most-sm{
     @extend %display-inline-block-when-ssm;
@@ -94,6 +142,14 @@ SOFTWARE.
     @extend %display-block-at-most-sm;
     @extend %display-block-when-md;
 }
+%display-flex-at-most-md{
+    @extend %display-flex-at-most-sm;
+    @extend %display-flex-when-md;
+}
+%display-inline-flex-at-most-md{
+    @extend %display-inline-flex-at-most-sm;
+    @extend %display-inline-flex-when-md;
+}
 %display-inline-block-at-most-md{
     @extend %display-inline-block-at-most-sm;
     @extend %display-inline-block-when-md;
@@ -106,6 +162,14 @@ SOFTWARE.
 %display-block-at-most-lg{
     @extend %display-block-at-most-md;
     @extend %display-block-when-lg;
+}
+%display-flex-at-most-lg{
+    @extend %display-flex-at-most-md;
+    @extend %display-flex-when-lg;
+}
+%display-inline-flex-at-most-lg{
+    @extend %display-inline-flex-at-most-md;
+    @extend %display-inline-flex-when-lg;
 }
 %display-inline-block-at-most-lg{
     @extend %display-inline-block-at-most-md;
@@ -121,6 +185,16 @@ SOFTWARE.
     @extend %display-block-at-most-lg;
     @extend %display-block-when-xl;
 }
+%display-flex-at-most-xl{
+    /* display: block */
+    @extend %display-flex-at-most-lg;
+    @extend %display-flex-when-xl;
+}
+%display-inline-flex-at-most-xl{
+    /* display: inline-block */
+    @extend %display-inline-flex-at-most-lg;
+    @extend %display-inline-flex-when-xl;
+}
 %display-inline-block-at-most-xl{
     /* display: inline-block */
     @extend %display-inline-block-at-most-lg;
@@ -135,6 +209,12 @@ SOFTWARE.
 %display-block-at-least-xl{
     @extend %display-block-when-xl;
 }
+%display-flex-at-least-xl{
+    @extend %display-flex-when-xl;
+}
+%display-inline-flex-at-least-xl{
+    @extend %display-inline-flex-when-xl;
+}
 %display-inline-block-at-least-xl{
     @extend %display-inline-block-when-xl;
 }
@@ -145,6 +225,14 @@ SOFTWARE.
 %display-block-at-least-lg{
     @extend %display-block-at-least-xl;
     @extend %display-block-when-lg;
+}
+%display-flex-at-least-lg{
+    @extend %display-flex-at-least-xl;
+    @extend %display-flex-when-lg;
+}
+%display-inline-flex-at-least-lg{
+    @extend %display-inline-flex-at-least-xl;
+    @extend %display-inline-flex-when-lg;
 }
 %display-inline-block-at-least-lg{
     @extend %display-inline-block-at-least-xl;
@@ -159,6 +247,14 @@ SOFTWARE.
     @extend %display-block-at-least-lg;
     @extend %display-block-when-md;
 }
+%display-flex-at-least-md{
+    @extend %display-flex-at-least-lg;
+    @extend %display-flex-when-md;
+}
+%display-inline-flex-at-least-md{
+    @extend %display-inline-flex-at-least-lg;
+    @extend %display-inline-flex-when-md;
+}
 %display-inline-block-at-least-md{
     @extend %display-inline-block-at-least-lg;
     @extend %display-inline-block-when-md;
@@ -171,6 +267,14 @@ SOFTWARE.
 %display-block-at-least-sm{
     @extend %display-block-at-least-md;
     @extend %display-block-when-sm;
+}
+%display-flex-at-least-sm{
+    @extend %display-flex-at-least-md;
+    @extend %display-flex-when-sm;
+}
+%display-inline-flex-at-least-sm{
+    @extend %display-inline-flex-at-least-md;
+    @extend %display-inline-flex-when-sm;
 }
 %display-inline-block-at-least-sm{
     @extend %display-inline-block-at-least-md;
