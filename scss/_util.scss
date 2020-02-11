@@ -21,28 +21,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-$color-grey-100: #f8f9fa;
-$color-grey-200: #e9ecef;
-$color-grey-300: #dee2e6;
-$color-grey-400: #ced4da;
-$color-grey-500: #adb5bd;
-$color-grey-600: #6c757d;
-$color-grey-700: #495057;
-$color-grey-800: #343a40;
-$color-grey-900: #212529;
-$color-white: #ffffff;
-$color-black: #000000;
-$color-blue: #007bff;
-$color-indigo: #6610f2;
-$color-purple: #6f42c1;
-$color-pink: #e83e8c;
-$color-red: #dc3545;
-$color-orange: #fd7e14;
-$color-yellow: #ffc107;
-$color-green: #28a745;
-$color-teal: #20c997;
-$color-cyan: #17a2b8;
-$color-theme-primary: $color-blue;
-$color-theme-secondary: $color-grey-600;
-$color-theme-success: $color-green;
-$color-theme-danger: $color-red;
+
+@mixin media($args...) {
+    $query: "";
+    @each $arg in $args {
+      $op: "";
+      @if ( $query != "" ) {
+        $op: " and ";
+      }
+      $query: $query + $op + $arg;
+    }
+    @media #{$query}  { @content; }
+}
+
+@function translate-media-condition($title, $value){
+    @return "(#{$title}: #{$value})";
+}
+

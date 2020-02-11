@@ -1,0 +1,104 @@
+/*
+MIT License
+
+Copyright (c) 2018-2020 interactiveplus.org
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+@use 'util';
+
+$size-vals: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+$ssm-min-width: 0px;
+$ssm-max-width: 575px;
+$sm-min-width: $ssm-max-width + 1;
+$sm-max-width: 767px;
+$md-min-width: $sm-max-width + 1;
+$md-max-width: 991px;
+$lg-min-width: $md-max-width + 1;
+$lg-max-width: 1139px;
+$xl-min-width: $lg-min-width + 1;
+
+@mixin device-size-ssm {
+    @include util.media(util.translate-media-condition("min-width",$ssm-min-width), util.translate-media-condition("max-width",$ssm-max-width)){ @content; }
+}
+@mixin device-size-sm {
+    @include util.media(util.translate-media-condition("min-width",$sm-min-width), util.translate-media-condition("max-width",$sm-max-width)){ @content; }
+}
+@mixin device-size-md {
+    @include util.media(util.translate-media-condition("min-width",$md-min-width), util.translate-media-condition("max-width",$md-max-width)){ @content; }
+}
+@mixin device-size-lg {
+    @include util.media(util.translate-media-condition("min-width",$lg-min-width), util.translate-media-condition("max-width",$lg-max-width)){ @content; }
+}
+@mixin device-size-xl{
+    @include util.media(util.translate-media-condition("min-width",$xl-min-width)){ @content; };
+}
+
+@mixin device-size-at-least-sm {
+    @include device-size-sm(){ @content; }
+    @include device-size-md(){ @content; }
+    @include device-size-lg(){ @content; }
+    @include device-size-xl(){ @content; }
+}
+
+
+@mixin device-size-at-least-md {
+    @include device-size-md(){ @content; }
+    @include device-size-lg(){ @content; }
+    @include device-size-xl(){ @content; }
+}
+
+
+@mixin device-size-at-least-lg {
+    @include device-size-lg(){ @content; }
+    @include device-size-xl(){ @content; }
+}
+
+
+@mixin device-size-at-most-sm {
+    @include device-size-ssm(){ @content; }
+    @include device-size-sm(){ @content; }
+}
+
+
+@mixin device-size-at-most-md {
+    @include device-size-ssm(){ @content; }
+    @include device-size-sm(){ @content; }
+    @include device-size-md(){ @content; }
+}
+
+@mixin device-size-at-most-lg {
+    @include device-size-ssm(){ @content; }
+    @include device-size-sm(){ @content; }
+    @include device-size-md(){ @content; }
+    @include device-size-lg(){ @content; }
+}
+
+@function calculate-percent($numberOutOf12){
+    @return ($numberOutOf12 / 12.0 * 100%);
+}
+
+@mixin width($width-val) {
+    width: calculate-percent($width-val);
+}
+
+@mixin height($height-val) {
+    height: calculate-percent($height-val);
+}

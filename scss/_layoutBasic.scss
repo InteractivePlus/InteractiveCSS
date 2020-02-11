@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2018 interactiveplus.org
+Copyright (c) 2018-2020 interactiveplus.org
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,3 +21,203 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+@use 'util';
+@use 'sizing';
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.box-sizing-border-box{
+    box-sizing: border-box;
+}
+
+.box-sizing-content-box {
+    box-sizing: content-box;
+}
+
+//========== Beginning of Container Definition =========
+
+%basic-container{
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+.container, .container-fluid{
+    @extend %basic-container;
+}
+
+.container-fluid{
+    max-width: 100%;
+}
+
+@include sizing.device-size-ssm(){
+    .container{
+        max-width: 100%;
+    }
+}
+
+@include sizing.device-size-sm(){
+    .container{
+        max-width: 540px;
+    }
+}
+
+@include sizing.device-size-md(){
+    .container{
+        max-width: 720px;
+    }
+}
+
+@include sizing.device-size-lg(){
+    .container{
+        max-width: 960px;
+    }
+}
+
+@include sizing.device-size-xl(){
+    .container{
+        max-width: 1140px;
+    }
+}
+
+//========== End of Container Definition ==========
+
+//========== Start of Grid System Definition ==========
+.row, .col {
+    box-sizing: border-box;
+}
+.row{
+    display: block;
+}
+.col{
+    display: inline-block;
+}
+
+@each $size-val in sizing.$size-vals{
+    .width-#{$size-val}{
+        @include sizing.width($size-val);
+    }
+    .height-#{$size-val}{
+        @include sizing.height($size-val);
+    }
+    @include sizing.device-size-ssm(){
+        .height-when-ssm-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-ssm-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+    @include sizing.device-size-sm(){
+        .height-when-sm-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-sm-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+    @include sizing.device-size-md(){
+        .height-when-md-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-md-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+    @include sizing.device-size-lg(){
+        .height-when-lg-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-lg-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+    @include sizing.device-size-xl(){
+        .height-when-xl-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-xl-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+    @include sizing.device-size-at-least-sm(){
+        .height-at-least-sm-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-least-sm-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+    @include sizing.device-size-at-least-md(){
+        .height-at-least-md-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-least-md-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+    @include sizing.device-size-at-least-lg(){
+        .height-at-least-lg-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-least-lg-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+    @include sizing.device-size-at-most-sm(){
+        .height-at-most-sm-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-most-sm-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+    @include sizing.device-size-at-most-md(){
+        .height-at-most-md-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-most-md-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+    @include sizing.device-size-at-most-lg(){
+        .height-at-most-lg-#{$size-val}{
+            @include sizing.height($size-val);
+        }
+        .width-when-most-lg-#{$size-val}{
+            @include sizing.width($size-val);
+        }
+    }
+}
+
+//========== End of Grid System Definition ==========
+
+//========== Start of Display Definition ==========
+.d-none{
+    display: none;
+}
+
+.d-block{
+    display: block;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.d-inline-flex{
+    display:inline-flex;
+}
+
+.d-inline-block{
+    display: inline-block;
+}
+
+.d-inline{
+    display: inline;
+}
+
+//========== End of Display Definition ==========
