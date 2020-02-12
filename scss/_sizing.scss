@@ -102,3 +102,74 @@ $xl-min-width: $lg-min-width + 1;
 @mixin height($height-val) {
     height: calculate-percent($height-val);
 }
+
+@mixin width-important($width-val) {
+    width: calculate-percent($width-val);
+}
+
+@mixin height-important($height-val) {
+    height: calculate-percent($height-val);
+}
+
+@mixin sizableProperty($cssSelectors...) {
+    @each $cssSelector in $cssSelectors{
+        #{$cssSelector}{
+            @content;
+        }
+        @include device-size-ssm(){
+            #{$cssSelector}-when-ssm{
+                @content;
+            }
+        }
+        @include device-size-sm(){
+            #{$cssSelector}-when-sm{
+                @content;
+            }
+        }
+        @include device-size-md(){
+            #{$cssSelector}-when-md{
+                @content;
+            }
+        }
+        @include device-size-lg(){
+            #{$cssSelector}-when-lg{
+                @content;
+            }
+        }
+        @include device-size-xl(){
+            #{$cssSelector}-when-xl{
+                @content;
+            }
+        }
+        @include device-size-at-least-sm() {
+            #{$cssSelector}-at-least-sm{
+                @content;
+            }
+        }
+        @include device-size-at-least-md() {
+            #{$cssSelector}-at-least-md{
+                @content;
+            }
+        }
+        @include device-size-at-least-lg() {
+            #{$cssSelector}-at-least-lg{
+                @content;
+            }
+        }
+        @include device-size-at-most-sm() {
+            #{$cssSelector}-at-most-sm{
+                @content;
+            }
+        }
+        @include device-size-at-most-md() {
+            #{$cssSelector}-at-most-md{
+                @content;
+            }
+        }
+        @include device-size-at-most-lg() {
+            #{$cssSelector}-at-most-lg{
+                @content;
+            }
+        }
+    }
+}

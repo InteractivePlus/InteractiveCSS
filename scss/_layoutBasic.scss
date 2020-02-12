@@ -27,6 +27,7 @@ SOFTWARE.
 
 *, *::before, *::after {
     box-sizing: border-box;
+    word-wrap: break-word;
 }
 
 .box-sizing-border-box{
@@ -64,7 +65,7 @@ SOFTWARE.
         max-width: 540px;
     }
 }
-
+ 
 @include sizing.device-size-md(){
     .container{
         max-width: 720px;
@@ -99,127 +100,193 @@ SOFTWARE.
 }
 
 @each $size-val in sizing.$size-vals{
-    .width-#{$size-val}{
-        @include sizing.width($size-val);
+    @include sizing.sizableProperty(".width-" + $size-val){
+        @include sizing.width($size-val)
     }
-    .height-#{$size-val}{
-        @include sizing.height($size-val);
-    }
-    @include sizing.device-size-ssm(){
-        .height-when-ssm-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-ssm-#{$size-val}{
-            @include sizing.width($size-val);
-        }
-    }
-    @include sizing.device-size-sm(){
-        .height-when-sm-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-sm-#{$size-val}{
-            @include sizing.width($size-val);
-        }
-    }
-    @include sizing.device-size-md(){
-        .height-when-md-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-md-#{$size-val}{
-            @include sizing.width($size-val);
-        }
-    }
-    @include sizing.device-size-lg(){
-        .height-when-lg-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-lg-#{$size-val}{
-            @include sizing.width($size-val);
-        }
-    }
-    @include sizing.device-size-xl(){
-        .height-when-xl-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-xl-#{$size-val}{
-            @include sizing.width($size-val);
-        }
-    }
-    @include sizing.device-size-at-least-sm(){
-        .height-at-least-sm-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-least-sm-#{$size-val}{
-            @include sizing.width($size-val);
-        }
-    }
-    @include sizing.device-size-at-least-md(){
-        .height-at-least-md-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-least-md-#{$size-val}{
-            @include sizing.width($size-val);
-        }
-    }
-    @include sizing.device-size-at-least-lg(){
-        .height-at-least-lg-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-least-lg-#{$size-val}{
-            @include sizing.width($size-val);
-        }
-    }
-    @include sizing.device-size-at-most-sm(){
-        .height-at-most-sm-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-most-sm-#{$size-val}{
-            @include sizing.width($size-val);
-        }
-    }
-    @include sizing.device-size-at-most-md(){
-        .height-at-most-md-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-most-md-#{$size-val}{
-            @include sizing.width($size-val);
-        }
-    }
-    @include sizing.device-size-at-most-lg(){
-        .height-at-most-lg-#{$size-val}{
-            @include sizing.height($size-val);
-        }
-        .width-when-most-lg-#{$size-val}{
-            @include sizing.width($size-val);
-        }
+    @include sizing.sizableProperty("height-" + $size-val){
+        @include sizing.height($size-val)
     }
 }
 
 //========== End of Grid System Definition ==========
 
 //========== Start of Display Definition ==========
-.d-none{
-    display: none;
-}
 
-.d-block{
-    display: block;
-}
-
-.d-flex{
-    display: flex;
-}
-
-.d-inline-flex{
-    display:inline-flex;
-}
-
-.d-inline-block{
-    display: inline-block;
-}
-
-.d-inline{
-    display: inline;
+//display types, see https://developer.mozilla.org/en-US/docs/Web/CSS/display
+$display_styles: "none", "block", "flex", "inline-block", "inline-flex", "inline";
+@each $display-style in $display_styles{
+    @include sizing.sizableProperty(".d-" + $display-style){
+        display: $display-style !important;
+    }
 }
 
 //========== End of Display Definition ==========
+
+//========== Start of Flex Container Definition ==========
+
+//2 ways to define a flex container, either use .d-flex or .flex-container
+@include sizing.sizableProperty(".flex-container"){
+    display: flex;
+}
+//https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction
+$flex-direction-types: "row", "row-reverse", "column", "column-reverse";
+@each $flex-direction-type in $flex-direction-types{
+    @include sizing.sizableProperty(".flex-container-direction-" + $flex-direction-type){
+        flex-direction: $flex-direction-type;
+    }
+}
+//https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap
+$flex-wrap-types: "nowrap", "wrap", "wrap-reverse";
+@each $flex-wrap-type in $flex-wrap-types{
+    @include sizing.sizableProperty(".flex-container-wrap-type-" + $flex-wrap-type){
+        flex-wrap: $flex-wrap-type;
+    }
+}
+//https://developer.mozilla.org/en-US/docs/Web/CSS/align-content
+@include sizing.sizableProperty(".flex-container-align-cross-axis-start"){
+    align-content: flex-start;
+}
+@include sizing.sizableProperty(".flex-container-align-cross-axis-center"){
+    align-content: center;
+}
+@include sizing.sizableProperty(".flex-container-align-cross-axis-end"){
+    align-content: flex-end;
+}
+@include sizing.sizableProperty(".flex-container-align-cross-axis-normal"){
+    align-content: normal;
+}
+@include sizing.sizableProperty(".flex-container-align-cross-axis-baseline"){
+    align-content: baseline;
+}
+@include sizing.sizableProperty(".flex-container-align-cross-axis-distribute-no-space-each-end"){
+    align-content: space-between;
+}
+@include sizing.sizableProperty(".flex-container-align-cross-axis-distribute-half-space-each-end"){
+    align-content: space-around;
+}
+@include sizing.sizableProperty(".flex-container-align-cross-axis-distribute-full-space-each-end"){
+    align-content: space-evenly;
+}
+@include sizing.sizableProperty(".flex-container-align-cross-axis-stretch"){
+    align-content: stretch;
+}
+//https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content
+@include sizing.sizableProperty(".flex-container-align-main-axis-start"){
+    justify-content: flex-start;
+}
+@include sizing.sizableProperty(".flex-container-align-main-axis-center"){
+    justify-content: center;
+}
+@include sizing.sizableProperty(".flex-container-align-main-axis-end"){
+    justify-content: flex-end;
+}
+@include sizing.sizableProperty(".flex-container-align-main-axis-normal"){
+    justify-content: normal;
+}
+@include sizing.sizableProperty(".flex-container-align-main-axis-baseline"){
+    justify-content: baseline;
+}
+@include sizing.sizableProperty(".flex-container-align-main-axis-distribute-no-space-each-end"){
+    justify-content: space-between;
+}
+@include sizing.sizableProperty(".flex-container-align-main-axis-distribute-half-space-each-end"){
+    justify-content: space-around;
+}
+@include sizing.sizableProperty(".flex-container-align-main-axis-distribute-full-space-each-end"){
+    justify-content: space-evenly;
+}
+@include sizing.sizableProperty(".flex-container-align-main-axis-stretch"){
+    justify-content: stretch;
+}
+//https://developer.mozilla.org/en-US/docs/Web/CSS/align-items
+@include sizing.sizableProperty(".flex-container-items-default-align-cross-axis-start"){
+    align-items: flex-start;
+}
+@include sizing.sizableProperty(".flex-container-items-default-align-cross-axis-center"){
+    align-items: center;
+}
+@include sizing.sizableProperty(".flex-container-items-default-align-cross-axis-end"){
+    align-items: flex-end;
+}
+@include sizing.sizableProperty(".flex-container-items-default-align-cross-axis-normal"){
+    align-items: normal;
+}
+@include sizing.sizableProperty(".flex-container-items-default-align-cross-axis-baseline"){
+    align-items: baseline;
+}
+@include sizing.sizableProperty(".flex-container-items-default-align-cross-axis-stretch"){
+    align-items: stretch;
+}
+//https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items
+@include sizing.sizableProperty(".flex-container-items-default-align-main-axis-start"){
+    justify-items: flex-start;
+}
+@include sizing.sizableProperty(".flex-container-items-default-align-main-axis-center"){
+    justify-items: center;
+}
+@include sizing.sizableProperty(".flex-container-items-default-align-main-axis-end"){
+    justify-items: flex-end;
+}
+@include sizing.sizableProperty(".flex-container-items-default-align-main-axis-normal"){
+    justify-items: normal;
+}
+@include sizing.sizableProperty(".flex-container-items-default-align-main-axis-baseline"){
+    justify-items: baseline;
+}
+@include sizing.sizableProperty(".flex-container-items-default-align-main-axis-stretch"){
+    justify-items: stretch;
+}
+//https://developer.mozilla.org/en-US/docs/Web/CSS/align-self
+@include sizing.sizableProperty(".flex-item-align-cross-axis-start"){
+    align-self: flex-start;
+}
+@include sizing.sizableProperty(".flex-item-align-cross-axis-center"){
+    align-self: center;
+}
+@include sizing.sizableProperty(".flex-item-align-cross-axis-end"){
+    align-self: flex-end;
+}
+@include sizing.sizableProperty(".flex-item-align-cross-axis-normal"){
+    align-self: normal;
+}
+@include sizing.sizableProperty(".flex-item-align-cross-axis-baseline"){
+    align-self: baseline;
+}
+@include sizing.sizableProperty(".flex-item-align-cross-axis-stretch"){
+    align-self: stretch;
+}
+//https://developer.mozilla.org/en-US/docs/Web/CSS/justify-self
+@include sizing.sizableProperty(".flex-item-align-main-axis-start"){
+    justify-self: flex-start;
+}
+@include sizing.sizableProperty(".flex-item-align-main-axis-center"){
+    justify-self: center;
+}
+@include sizing.sizableProperty(".flex-item-align-main-axis-end"){
+    justify-self: flex-end;
+}
+@include sizing.sizableProperty(".flex-item-align-main-axis-normal"){
+    justify-self: normal;
+}
+@include sizing.sizableProperty(".flex-item-align-main-axis-baseline"){
+    justify-self: baseline;
+}
+@include sizing.sizableProperty(".flex-item-align-main-axis-stretch"){
+    justify-self: stretch;
+}
+
+//========== End of Flex Container Definition ==========
+
+//========== Start of Alignment Definition ==========
+
+//Inline or Table Verticle Align Type, see https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align
+$inline-or-table-vertical-alignment-types: "baseline", "sub", "super", "text-top", "text-bottom", "middle", "top", "bottom";
+@each $vertical-align-type in $inline-or-table-vertical-alignment-types{
+    @include sizing.sizableProperty(".align-vertical-" + $vertical-align-type){
+        vertical-align: $vertical-align-type !important;
+    }
+}
+
+//Flex alignment, here we are simplifying the alignment 
+
+//========== End of Alignment Definition ==========
