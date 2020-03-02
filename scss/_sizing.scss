@@ -120,9 +120,30 @@ $xl-min-width: $lg-min-width + 1;
             #{$cssSelector}-when-ssm{
                 @content;
             }
+            #{$cssSelector}-at-most-sm{
+                @content;
+            }
+            #{$cssSelector}-at-most-md{
+                @content;
+            }
+            #{$cssSelector}-at-most-lg{
+                @content;
+            }
         }
         @include device-size-sm(){
             #{$cssSelector}-when-sm{
+                @content;
+            }
+            #{$cssSelector}-at-least-sm{
+                @content;
+            }
+            #{$cssSelector}-at-most-sm{
+                @content;
+            }
+            #{$cssSelector}-at-most-md{
+                @content;
+            }
+            #{$cssSelector}-at-most-lg{
                 @content;
             }
         }
@@ -130,9 +151,33 @@ $xl-min-width: $lg-min-width + 1;
             #{$cssSelector}-when-md{
                 @content;
             }
+            #{$cssSelector}-at-least-sm{
+                @content;
+            }
+            #{$cssSelector}-at-least-md{
+                @content;
+            }
+            #{$cssSelector}-at-most-md{
+                @content;
+            }
+            #{$cssSelector}-at-most-lg{
+                @content;
+            }
         }
         @include device-size-lg(){
             #{$cssSelector}-when-lg{
+                @content;
+            }
+            #{$cssSelector}-at-least-sm{
+                @content;
+            }
+            #{$cssSelector}-at-least-md{
+                @content;
+            }
+            #{$cssSelector}-at-least-lg{
+                @content;
+            }
+            #{$cssSelector}-at-most-lg{
                 @content;
             }
         }
@@ -140,34 +185,13 @@ $xl-min-width: $lg-min-width + 1;
             #{$cssSelector}-when-xl{
                 @content;
             }
-        }
-        @include device-size-at-least-sm() {
             #{$cssSelector}-at-least-sm{
                 @content;
             }
-        }
-        @include device-size-at-least-md() {
             #{$cssSelector}-at-least-md{
                 @content;
             }
-        }
-        @include device-size-at-least-lg() {
             #{$cssSelector}-at-least-lg{
-                @content;
-            }
-        }
-        @include device-size-at-most-sm() {
-            #{$cssSelector}-at-most-sm{
-                @content;
-            }
-        }
-        @include device-size-at-most-md() {
-            #{$cssSelector}-at-most-md{
-                @content;
-            }
-        }
-        @include device-size-at-most-lg() {
-            #{$cssSelector}-at-most-lg{
                 @content;
             }
         }
